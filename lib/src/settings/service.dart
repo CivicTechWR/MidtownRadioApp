@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SettingsService {
   Future<ThemeMode> themeMode() async {
     final prefs = await SharedPreferences.getInstance();
-    final theme = prefs.getString('themeMode') ?? 'dark'; // Default to dark
+    final theme = prefs.getString('themeMode');
     switch (theme) {
       case 'light':
         return ThemeMode.light;

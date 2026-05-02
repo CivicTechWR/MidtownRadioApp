@@ -23,12 +23,17 @@ class _OnDemandPageState extends State<OnDemandPage> {
     _onDemandFuture = OnDemand.create();
   }
 
-  String _formatShowDisplayDate(DateTime? sortableDate, String? originalDateString) {
+  String _formatShowDisplayDate(
+      final DateTime? sortableDate,
+      final String? originalDateString
+      ) {
     if (sortableDate != null) {
       return DateFormat('MMM d, yyyy').format(sortableDate);
     }
     if (originalDateString != null && originalDateString.isNotEmpty) {
-      return originalDateString.length > 16 ? "${originalDateString.substring(0, 16)}..." : originalDateString;
+      return originalDateString.length > 16
+          ? "${originalDateString.substring(0, 16)}..."
+          : originalDateString;
     }
     return 'Date N/A';
   }
@@ -71,7 +76,11 @@ class _OnDemandPageState extends State<OnDemandPage> {
           future: _onDemandFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator(semanticsLabel: "Loading On Demand Shows.",));
+              return const Center(
+                  child: CircularProgressIndicator(
+                    semanticsLabel: "Loading On Demand Shows.",
+                  )
+              );
             } else if (snapshot.hasError) {
               return Center(child: Text("An unexpected error has occured. Please try again later."));
             } else if (!snapshot.hasData || snapshot.data!.shows.isEmpty) {
